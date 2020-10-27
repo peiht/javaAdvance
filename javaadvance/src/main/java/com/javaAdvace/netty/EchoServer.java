@@ -1,4 +1,4 @@
-package com.javaAdvance.netty;
+package com.javaAdvace.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -55,13 +55,13 @@ public class EchoServer {
     }
 
     public static void main(String[] args) throws Exception{
-        if (args.length != 1) {
-            System.err.println(
-                    "Usage : " + EchoServer.class.getSimpleName() + " <port>"
-            );
-        }
+//        if (args.length != 1) {
+//            System.err.println(
+//                    "Usage : " + EchoServer.class.getSimpleName() + " <port>"
+//            );
+//        }
 
-        int port = Integer.parseInt(args[0]);
+        int port = Integer.parseInt("8801");
         new EchoServer(port).start();
     }
 }

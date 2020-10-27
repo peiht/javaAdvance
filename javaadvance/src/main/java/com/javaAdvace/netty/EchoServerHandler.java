@@ -1,4 +1,4 @@
-package com.javaAdvance.netty;
+package com.javaAdvace.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -28,6 +28,7 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
                 .addListener(ChannelFutureListener.CLOSE);
     }
 
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
