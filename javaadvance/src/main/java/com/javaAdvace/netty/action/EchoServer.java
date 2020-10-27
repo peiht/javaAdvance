@@ -1,4 +1,4 @@
-package com.javaAdvace.netty;
+package com.javaAdvace.netty.action;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
