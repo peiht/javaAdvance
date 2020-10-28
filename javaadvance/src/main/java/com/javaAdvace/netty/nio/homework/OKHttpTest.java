@@ -30,12 +30,18 @@ public class OKHttpTest {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    throw  new IOException("响应失败");
+                    throw new IOException("响应失败");
                 }
 
                 Headers headers = response.headers();
-                System.out.println(response.body().toString());
+                //输出hello, nio
+                System.out.println(response.body().string());
             }
         });
+    }
+
+    public static void main(String[] args) {
+        OKHttpTest test = new OKHttpTest();
+        test.visit();
     }
 }
