@@ -24,7 +24,7 @@ public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         try {
             FullHttpRequest fullHttpRequest = (FullHttpRequest) msg;
-            //TODO
+            httpOutboundHandler.handle(fullHttpRequest, ctx);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
