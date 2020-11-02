@@ -1,6 +1,12 @@
 package com.javaAdcance.netty.gateway;
 
 import com.javaAdcance.netty.gateway.inbound.HttpInboundServer;
+import com.javaAdcance.netty.gateway.router.HttpEndpointRouter;
+import com.javaAdcance.netty.gateway.router.HttpRouter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * netty网关服务启动
@@ -13,6 +19,13 @@ public class NettyServerApplication {
     public final static String GATEWAY_VERSION = "1.0.0";
 
     public static void main(String[] args) {
+
+//        String[] routeArray = {"http://localhost:8801", "http://localhost:8802", "http://localhost:8803"};
+//        List<String> routes = new ArrayList<>(Arrays.asList(routeArray));
+
+        //HttpEndpointRouter router = new HttpRouter();s
+        //String proxyServer = router.route(routes);
+        //System.out.println("路由返回的地址是：" + proxyServer);
         String proxyServer = System.getProperty("proxyServer", "http://localhost:8801");
         String proxyPort = System.getProperty("proxyPort", "8888");
 
