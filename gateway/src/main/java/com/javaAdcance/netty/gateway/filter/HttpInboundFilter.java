@@ -8,6 +8,6 @@ public class HttpInboundFilter implements HttpRequestFilter{
     @Override
     public void filter(FullHttpRequest fullRequest, ChannelHandlerContext ctx) {
         HttpHeaders httpHeaders = fullRequest.headers();
-        httpHeaders.add("nio", "hello");
+        httpHeaders.add("nio", "peihaitao");
     }
 }

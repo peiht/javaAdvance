@@ -16,14 +16,14 @@ import java.util.List;
 
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
-    private final String proxyServer;
+    //private final String proxyServer;
     private OkHttpOutboundHandler okHttpOutboundHandler;
     private HttpEndpointRouter router;
-    private String[] routeArray = {"http://localhost:8801", "http://localhost:8802", "http://localhost:8803"};
+    private final String[] routeArray = {"http://localhost:8801", "http://localhost:8802", "http://localhost:8803"};
 
     public HttpInboundHandler(String proxyServer) {
         List<String> routes = new ArrayList<>(Arrays.asList(routeArray));
-        this.proxyServer = proxyServer;
+        //this.proxyServer = proxyServer;
         this.router = new HttpRouter();
         String routerUrl = router.route(routes);
         System.out.println("路由地址为：" + routerUrl);

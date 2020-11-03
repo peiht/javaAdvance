@@ -20,12 +20,6 @@ public class NettyServerApplication {
 
     public static void main(String[] args) {
 
-//        String[] routeArray = {"http://localhost:8801", "http://localhost:8802", "http://localhost:8803"};
-//        List<String> routes = new ArrayList<>(Arrays.asList(routeArray));
-
-        //HttpEndpointRouter router = new HttpRouter();s
-        //String proxyServer = router.route(routes);
-        //System.out.println("路由返回的地址是：" + proxyServer);
         String proxyServer = System.getProperty("proxyServer", "http://localhost:8801");
         String proxyPort = System.getProperty("proxyPort", "8888");
 

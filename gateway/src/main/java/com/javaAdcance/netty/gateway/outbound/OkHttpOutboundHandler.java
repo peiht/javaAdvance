@@ -45,7 +45,7 @@ public class OkHttpOutboundHandler {
     public void handle(final FullHttpRequest fullHttpRequest, final ChannelHandlerContext ctx) {
         HttpHeaders headers = fullHttpRequest.headers();
         //输出过滤器添加的header中的value
-        System.out.println(headers.get("nio"));
+        System.out.println("过滤器中header添加的值为" + headers.get("nio"));
         final String url = this.backendUrl + fullHttpRequest.uri();
         executorService.submit(() -> fetchGet(fullHttpRequest, ctx, url));
     }
