@@ -5,6 +5,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 线程的工厂类
+ * @author hitopei
+ *
+ */
 public class NamedThreadFactory implements ThreadFactory {
 
     private final ThreadGroup group;

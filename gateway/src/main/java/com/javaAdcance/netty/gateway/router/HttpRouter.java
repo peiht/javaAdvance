@@ -12,6 +12,7 @@ public class HttpRouter implements HttpEndpointRouter {
     @Override
     public String route(List<String> endpoints) {
         Random random = new Random();
+        //随机从数组中取出一个路径
         return endpoints.get(random.nextInt(3));
     }
 }

@@ -5,19 +5,18 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.*;
 import okhttp3.*;
-import org.apache.http.HttpResponse;
-import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
-import org.apache.http.impl.nio.reactor.IOReactorConfig;
-import org.apache.http.util.EntityUtils;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.concurrent.*;
 
-
+/**
+ * @author hitopei
+ *
+ * OKHttp实现的请求代理地址
+ */
 public class OkHttpOutboundHandler {
-
 
     private String backendUrl;
     private ExecutorService executorService;
@@ -50,6 +49,12 @@ public class OkHttpOutboundHandler {
         executorService.submit(() -> fetchGet(fullHttpRequest, ctx, url));
     }
 
+    /**
+     * OKHttp 的请求方法
+     * @param inbound
+     * @param ctx
+     * @param url
+     */
     private void fetchGet(final FullHttpRequest inbound, final ChannelHandlerContext ctx, final String url) {
         Request request = new Request.Builder()
                 .url(url).build();
@@ -67,11 +72,17 @@ public class OkHttpOutboundHandler {
         });
     }
 
-
+    /**
+     * 处理response
+     * @param request
+     * @param ctx
+     * @param resultResponse
+     */
     private void handleResponse(final FullHttpRequest request, final ChannelHandlerContext ctx,
                                 final Response resultResponse){
         FullHttpResponse response = null;
         try {
+            //这里的resultResponse的body只能消费一次，再次调用会报状态的错误
             byte[] body = resultResponse.body().bytes();
             response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, Unpooled.wrappedBuffer(body));
             response.headers().set("Content-Type", "application/json");

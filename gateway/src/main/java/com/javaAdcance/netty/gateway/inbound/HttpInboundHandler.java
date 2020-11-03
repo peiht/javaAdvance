@@ -14,18 +14,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author hitopei
+ *
+ * inbound handler
+ */
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {
 
-    //private final String proxyServer;
     private OkHttpOutboundHandler okHttpOutboundHandler;
     private HttpEndpointRouter router;
+    /**
+     * 路由的三个地址
+     */
     private final String[] routeArray = {"http://localhost:8801", "http://localhost:8802", "http://localhost:8803"};
 
     public HttpInboundHandler(String proxyServer) {
         List<String> routes = new ArrayList<>(Arrays.asList(routeArray));
-        //this.proxyServer = proxyServer;
         this.router = new HttpRouter();
         String routerUrl = router.route(routes);
+        //每次访问输出访问的代理路径
         System.out.println("路由地址为：" + routerUrl);
         okHttpOutboundHandler = new OkHttpOutboundHandler(routerUrl);
     }
