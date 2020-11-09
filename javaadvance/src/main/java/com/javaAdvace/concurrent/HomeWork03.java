@@ -1,6 +1,7 @@
 package com.javaAdvace.concurrent;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 public class HomeWork03 {
 
@@ -11,6 +12,8 @@ public class HomeWork03 {
         // 异步执行 下面方法
 
         int result = sum(); //这是得到的返回值
+
+
 
         // 确保  拿到result 并输出
         System.out.println("异步计算结果为："+result);
@@ -47,6 +50,6 @@ class Task implements Callable {
 
     @Override
     public Object call() throws Exception {
-        return null;
+        return sum();
     }
 }
