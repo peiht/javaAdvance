@@ -1,13 +1,36 @@
 package com.javaAdvace.concurrent;
 
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class HomeWork03 {
 
     public static void main(String[] args) throws Exception{
-        new HomeWork03().executeSync9();
+//        //线程池搭配Future
+//        new HomeWork03().executeSync1();
+//        //FutureTask配合线程池
+//        new HomeWork03().executeSync2();
+//        //FutureTask配合Thread
+//        new HomeWork03().executeSync3();
+//        //使用CompletableFuture实现
+//        new HomeWork03().executeSync4();
+//        //使用CountDownLatch实现
+//        new HomeWork03().executeSync5();
+//        //使用CyclicBarrier实现
+//        new HomeWork03().executeSync6();
+//        //使用Semaphore实现
+//        new HomeWork03().executeSync7();
+//        //使用synchronized和Object的wait()、notifyAll()实现
+//        new HomeWork03().executeSync8();
+//        //使用Lock和Condition实现
+//        new HomeWork03().executeSync9();
+        //使用无锁
+        new HomeWork03().executeSync10();
+        //LockSupport
+        System.out.println(sum());
     }
 
     /**
@@ -31,7 +54,6 @@ public class HomeWork03 {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
         // 然后退出main线程
     }
@@ -43,7 +65,6 @@ public class HomeWork03 {
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-
         ExecutorService executorService = Executors.newCachedThreadPool();
         FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
             @Override
@@ -59,7 +80,6 @@ public class HomeWork03 {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
         // 然后退出main线程
     }
@@ -71,7 +91,6 @@ public class HomeWork03 {
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-
         FutureTask<Integer> task = new FutureTask<>(new Callable<Integer>() {
             @Override
             public Integer call() throws Exception {
@@ -85,7 +104,6 @@ public class HomeWork03 {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
         // 然后退出main线程
     }
@@ -99,7 +117,6 @@ public class HomeWork03 {
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-
         // 确保  拿到result 并输出
         Integer result = CompletableFuture.supplyAsync(() -> {
             return sum();
@@ -118,17 +135,15 @@ public class HomeWork03 {
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-
-        // 确保  拿到result 并输出
         try {
             Task5 task5 = new Task5(latch);
             new Thread(task5).start();
             latch.await();
+            // 确保  拿到result 并输出
             System.out.println("异步计算结果为：" + task5.getRes());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
         // 然后退出main线程
     }
@@ -144,7 +159,6 @@ public class HomeWork03 {
             this.res = sum();
             latch.countDown();
         }
-
         public int getRes(){
             return this.res;
         }
@@ -158,7 +172,6 @@ public class HomeWork03 {
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-
         // 确保  拿到result 并输出
         Task6 task6 = new Task6(barrier);
         new Thread(task6).start();
@@ -168,7 +181,6 @@ public class HomeWork03 {
             e.printStackTrace();
         }
         System.out.println("异步计算结果为：" + task6.getRes());
-
         System.out.println("使用时间："+ (System.currentTimeMillis()-start) + " ms");
         // 然后退出main线程
     }
@@ -284,44 +296,85 @@ public class HomeWork03 {
     }
 
     /**
-     * Lock实现
+     * Lock 和 condition 实现
+     *
      */
     public void executeSync9(){
         Lock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
         long start=System.currentTimeMillis();
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
-        Task9 task9 = new Task9();
-        lock.lock();
-        try {
-            new Thread(task9).start();
-        } finally {
-            lock.unlock();
-        }
+        Task9 task9 = new Task9(condition, lock);
+        new Thread(task9).start();
 
         lock.lock();
         try {
+            condition.await();
             // 确保  拿到result 并输出
             System.out.println("异步计算结果为：" + task9.getRes());
             System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
-            // 然后退出main线程
-            } finally {
-                lock.unlock();
-            }
-
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
     }
 
     static class Task9 implements Runnable{
         private int res;
+        private Condition condition;
+        private Lock lock;
+
+        public Task9(Condition condition, Lock lock){
+            this.condition = condition;
+            this.lock = lock;
+        }
         @Override
         public void run() {
-            this.res = sum();
+            lock.lock();
+            try {
+                this.res = sum();
+                condition.signalAll();
+            } finally {
+                lock.unlock();
+            }
         }
 
         public int getRes(){
             return this.res;
         }
     }
+
+
+    private static volatile int res;
+    /**
+     * 自旋，如果结果正确就退出自旋往下执行，虽然这样破坏了task的封装特性
+     */
+    public void executeSync10(){
+        long start=System.currentTimeMillis();
+        AtomicInteger atomicInteger = new AtomicInteger(1);
+        // 在这里创建一个线程或线程池，
+        // 异步执行 下面方法
+        Task10 task10 = new Task10();
+        new Thread(task10).start();
+        while (HomeWork03.res != 24157817){
+            if (HomeWork03.res == 24157817){
+                break;
+            }
+        }
+        // 确保  拿到result 并输出
+        System.out.println("异步计算结果为：" + HomeWork03.res);
+        System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
+    }
+
+    static class Task10 implements Runnable{
+        @Override
+        public void run() {
+            res = sum();
+        }
+    }
+
 
     private static int sum() {
         return fibo(36);
