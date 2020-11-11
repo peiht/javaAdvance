@@ -1,9 +1,9 @@
 package com.javaAdvace.concurrent;
 
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class HomeWork03 {
@@ -27,10 +27,10 @@ public class HomeWork03 {
 //        new HomeWork03().executeSync8();
 //        //使用Lock和Condition实现
 //        new HomeWork03().executeSync9();
-        //使用无锁
-        new HomeWork03().executeSync10();
+//        //使用无锁
+//        new HomeWork03().executeSync10();
         //LockSupport
-        System.out.println(sum());
+        new HomeWork03().executeSync11();
     }
 
     /**
@@ -347,31 +347,64 @@ public class HomeWork03 {
     }
 
 
-    private static volatile int res;
+    private static volatile int res10;
     /**
      * 自旋，如果结果正确就退出自旋往下执行，虽然这样破坏了task的封装特性
      */
     public void executeSync10(){
         long start=System.currentTimeMillis();
-        AtomicInteger atomicInteger = new AtomicInteger(1);
         // 在这里创建一个线程或线程池，
         // 异步执行 下面方法
         Task10 task10 = new Task10();
         new Thread(task10).start();
-        while (HomeWork03.res != 24157817){
-            if (HomeWork03.res == 24157817){
+        while (HomeWork03.res10 != 24157817){
+            if (HomeWork03.res10 == 24157817){
                 break;
             }
         }
         // 确保  拿到result 并输出
-        System.out.println("异步计算结果为：" + HomeWork03.res);
+        System.out.println("异步计算结果为：" + HomeWork03.res10);
         System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
     }
 
     static class Task10 implements Runnable{
         @Override
         public void run() {
-            res = sum();
+            res10 = sum();
+        }
+    }
+
+    /**
+     * LockSupport实现
+     */
+    public void executeSync11(){
+        long start=System.currentTimeMillis();
+        // 在这里创建一个线程或线程池，
+        // 异步执行 下面方法
+        Task11 task11 = new Task11(Thread.currentThread());
+        new Thread(task11).start();
+        // 确保  拿到result 并输出
+        //阻塞当前主线程
+        LockSupport.park();
+        System.out.println("异步计算结果为：" + task11.getRes());
+        System.out.println("使用时间：" + (System.currentTimeMillis() - start) + " ms");
+    }
+
+    static class Task11 implements Runnable{
+        int res;
+        Thread thread;
+        public Task11(Thread thread) {
+            this.thread = thread;
+        }
+        @Override
+        public void run() {
+            this.res = sum();
+            //释放主线程
+            LockSupport.unpark(thread);
+        }
+
+        public int getRes(){
+            return this.res;
         }
     }
 
