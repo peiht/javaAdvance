@@ -6,12 +6,13 @@ import java.util.concurrent.Executors;
 
 /**
  * @author Administrator
- *
- *  配合线程池使用CountDownLatch
+ * <p>
+ * 配合线程池使用CountDownLatch
  */
 public class CountDownLatchDemo2 {
 
     private final static int threadCount = 200;
+
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
 

@@ -12,18 +12,16 @@ import java.net.InetSocketAddress;
 
 /**
  * @author Administrator
- *
- *
  */
 public class EchoServer {
 
     private final int port;
 
-    public EchoServer(int port){
+    public EchoServer(int port) {
         this.port = port;
     }
 
-    public void start() throws Exception{
+    public void start() throws Exception {
         final EchoServerHandler serverHandler = new EchoServerHandler();
         //创建EventLoopGroup
         EventLoopGroup group = new NioEventLoopGroup();
@@ -54,7 +52,7 @@ public class EchoServer {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        if (args.length != 1) {
 //            System.err.println(
 //                    "Usage : " + EchoServer.class.getSimpleName() + " <port>"

@@ -18,16 +18,17 @@ public class SemaphoreDemo {
     }
 }
 
-class Worker extends Thread{
+class Worker extends Thread {
     private int num;
     private Semaphore semaphore;
 
-    public Worker (int num, Semaphore semaphore) {
+    public Worker(int num, Semaphore semaphore) {
         this.num = num;
         this.semaphore = semaphore;
     }
+
     @Override
-    public void run (){
+    public void run() {
 
         try {
             semaphore.acquire();

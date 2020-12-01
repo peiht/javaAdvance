@@ -4,8 +4,9 @@ import java.sql.*;
 
 /**
  * jdbc 操作
- *
+ * <p>
  * 电脑本机的mysql起不来了，用的公司开发环境
+ *
  * @author hitopei
  */
 public class JdbcOperator {
@@ -13,6 +14,7 @@ public class JdbcOperator {
     private static final String username = "dct";
     private static final String password = "J8UfRvLEiUPz";
     private static final String jdbcUrl = "jdbc:mysql://10.0.20.202:3306/dct?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull";
+
     public static void main(String[] args) {
         //operate();
         //operatePreparedStatement();
@@ -22,7 +24,7 @@ public class JdbcOperator {
     /**
      * jdbc 基本用法
      */
-    public static void operate(){
+    public static void operate() {
         Connection connection = null;
         Statement statement = null;
         try {
@@ -60,7 +62,7 @@ public class JdbcOperator {
             try {
                 statement.close();
                 connection.close();
-            } catch ( SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -69,7 +71,7 @@ public class JdbcOperator {
     /**
      * preparedStatement实现增删改查
      */
-    public static void operatePreparedStatement(){
+    public static void operatePreparedStatement() {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -106,7 +108,7 @@ public class JdbcOperator {
             try {
                 statement.close();
                 connection.close();
-            } catch ( SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -115,7 +117,7 @@ public class JdbcOperator {
     /**
      * 开启jdbc事务，不使用自动提交，代码块执行完一起提交
      */
-    public static void operateTransaction(){
+    public static void operateTransaction() {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -166,7 +168,7 @@ public class JdbcOperator {
             try {
                 statement.close();
                 connection.close();
-            } catch ( SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -175,7 +177,7 @@ public class JdbcOperator {
     /**
      * 使用jdbc的批处理添加10条数据
      */
-    public static void operateBatch(){
+    public static void operateBatch() {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -222,7 +224,7 @@ public class JdbcOperator {
             try {
                 statement.close();
                 connection.close();
-            } catch ( SQLException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

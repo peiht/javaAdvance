@@ -17,7 +17,8 @@ public class OKHttpTest {
      * 要请求的地址
      */
     private final String address = "http://localhost:8801";
-    public void visit(){
+
+    public void visit() {
         Request request = new Request.Builder()
                 .url(address).build();
 

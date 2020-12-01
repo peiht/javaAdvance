@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @author hitopei
- *
+ * <p>
  * inbound handler
  */
 public class HttpInboundHandler extends ChannelInboundHandlerAdapter {

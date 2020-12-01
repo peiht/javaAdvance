@@ -13,7 +13,7 @@ import java.util.concurrent.*;
 
 /**
  * @author hitopei
- *
+ * <p>
  * OKHttp实现的请求代理地址
  */
 public class OkHttpOutboundHandler {
@@ -22,7 +22,7 @@ public class OkHttpOutboundHandler {
     private ExecutorService executorService;
     private OkHttpClient okHttpClient;
 
-    public OkHttpOutboundHandler(String backendUrl){
+    public OkHttpOutboundHandler(String backendUrl) {
         this.backendUrl = backendUrl.endsWith("/") ? backendUrl.substring(0, backendUrl.length() - 1) : backendUrl;
 
         int cores = Runtime.getRuntime().availableProcessors() * 2;
@@ -51,6 +51,7 @@ public class OkHttpOutboundHandler {
 
     /**
      * OKHttp 的请求方法
+     *
      * @param inbound
      * @param ctx
      * @param url
@@ -74,12 +75,13 @@ public class OkHttpOutboundHandler {
 
     /**
      * 处理response
+     *
      * @param request
      * @param ctx
      * @param resultResponse
      */
     private void handleResponse(final FullHttpRequest request, final ChannelHandlerContext ctx,
-                                final Response resultResponse){
+                                final Response resultResponse) {
         FullHttpResponse response = null;
         try {
             //这里的resultResponse的body只能消费一次，再次调用会报状态的错误

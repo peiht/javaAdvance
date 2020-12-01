@@ -17,7 +17,7 @@ public class BootAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public Student getStudent(){
+    public Student getStudent() {
         Student student = new Student();
         student.setName(bootConfiguration.getName());
         student.setId(1);

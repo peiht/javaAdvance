@@ -21,10 +21,10 @@ public class ReadWriteLockDemo {
                 readWriteLock.readLock().unlock();
                 readWriteLock.writeLock().lock();
                 try {
-                    if (value == null){
+                    if (value == null) {
                         value = "aaa";
                     }
-                }finally {
+                } finally {
                     System.out.println("释放写锁");
                     readWriteLock.writeLock().unlock();
                 }

@@ -22,7 +22,7 @@ public class AnnotationBeanDemo {
 
     private String name;
 
-    public void print(){
+    public void print() {
         System.out.println("bean loading success.......");
     }
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class HttpServer03 {
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         ExecutorService executorService = Executors.newFixedThreadPool(40);
         final ServerSocket serverSocket = new ServerSocket(8803);
         while (true) {
@@ -20,7 +20,7 @@ public class HttpServer03 {
             }
         }
     }
-    
+
     private static void service(Socket socket) {
         try {
             Thread.sleep(20);

@@ -5,7 +5,7 @@ import java.util.concurrent.CyclicBarrier;
 
 /**
  * @author Administrator
- *
+ * <p>
  * CyclicBarrier demo
  */
 public class CyclicBarrierDemo2 {
@@ -30,13 +30,15 @@ public class CyclicBarrierDemo2 {
     }
 }
 
-class Writer extends Thread{
+class Writer extends Thread {
     private CyclicBarrier cyclicBarrier;
-    public Writer (CyclicBarrier barrier){
+
+    public Writer(CyclicBarrier barrier) {
         this.cyclicBarrier = barrier;
     }
+
     @Override
-    public void run(){
+    public void run() {
         System.out.println("线程：" + Thread.currentThread().getName() + "正在写入数据");
 
         try {

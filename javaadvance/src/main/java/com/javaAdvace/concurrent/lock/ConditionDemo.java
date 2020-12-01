@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author hitopei
- *
+ * <p>
  * Condition demo
  */
 public class ConditionDemo {

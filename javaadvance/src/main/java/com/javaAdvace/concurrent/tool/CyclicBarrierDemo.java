@@ -28,14 +28,16 @@ public class CyclicBarrierDemo {
     }
 }
 
-class ReadNumCyc implements Runnable{
+class ReadNumCyc implements Runnable {
 
     private int id;
     private CyclicBarrier cyc;
+
     public ReadNumCyc(int id, CyclicBarrier cyc) {
         this.id = id;
         this.cyc = cyc;
     }
+
     @Override
     public void run() {
         synchronized (this) {

@@ -4,6 +4,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * semaphore 的生产者消费者模式
+ *
  * @author Administrator
  */
 public class SemaphoreDemo3 {
@@ -15,8 +16,10 @@ public class SemaphoreDemo3 {
     }
 
     static Warehouse buffer = new Warehouse();
+
     static class Producer implements Runnable {
         static int num = 1;
+
         @Override
         public void run() {
             int n = num++;
@@ -32,7 +35,7 @@ public class SemaphoreDemo3 {
         }
     }
 
-    static class Consumer implements Runnable{
+    static class Consumer implements Runnable {
 
         @Override
         public void run() {
@@ -56,7 +59,7 @@ public class SemaphoreDemo3 {
 
         int putptr, takeptr, count;
 
-        public void put(Object obj) throws InterruptedException{
+        public void put(Object obj) throws InterruptedException {
             notFull.acquire();
             mutex.acquire();
             items[putptr] = obj;
@@ -71,7 +74,7 @@ public class SemaphoreDemo3 {
             }
         }
 
-        public Object take() throws InterruptedException{
+        public Object take() throws InterruptedException {
             notEmpty.acquire();
             mutex.acquire();
             Object obj = items[takeptr];

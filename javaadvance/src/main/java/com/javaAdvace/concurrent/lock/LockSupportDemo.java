@@ -4,7 +4,7 @@ import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author hitopei
- *
+ * <p>
  * LockSupport demo
  */
 public class LockSupportDemo {
@@ -12,13 +12,14 @@ public class LockSupportDemo {
     static ChangeObjectThread t1 = new ChangeObjectThread("t1");
     static ChangeObjectThread t2 = new ChangeObjectThread("t2");
 
-    public static class ChangeObjectThread extends Thread{
+    public static class ChangeObjectThread extends Thread {
 
-        public ChangeObjectThread(String name){
+        public ChangeObjectThread(String name) {
             super(name);
         }
+
         @Override
-        public void run(){
+        public void run() {
             synchronized (o) {
                 System.out.println("in " + getName());
                 LockSupport.park();

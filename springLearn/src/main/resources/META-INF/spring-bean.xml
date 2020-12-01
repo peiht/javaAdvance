@@ -7,6 +7,6 @@
     <bean id="beanDemo" class="com.javaAdvance.spring.BeanLoad.BeanDemo">
         <property name="id" value="1"/>
         <property name="name" value="hello spring"/>
-     </bean>
+    </bean>
 
 </beans>

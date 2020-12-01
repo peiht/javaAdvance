@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * router接口
+ *
  * @author hitopei
  */
 public interface HttpEndpointRouter {

@@ -12,8 +12,6 @@ import java.net.InetSocketAddress;
 
 /**
  * @author hitopei
- *
- *
  */
 public class EchoClient {
 
@@ -25,7 +23,7 @@ public class EchoClient {
         this.port = port;
     }
 
-    public void start() throws Exception{
+    public void start() throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
@@ -45,7 +43,7 @@ public class EchoClient {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        if (args.length != 2) {
 //            System.err.println(
 //                    "Usage : " + EchoClient.class.getSimpleName() +

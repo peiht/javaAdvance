@@ -9,7 +9,7 @@ public class TestAop {
 
         Hello hello1 = handler.getHello();
 
-        Hello hello2 = (Hello)Proxy.newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(), handler);
+        Hello hello2 = (Hello) Proxy.newProxyInstance(hello.getClass().getClassLoader(), hello.getClass().getInterfaces(), handler);
 
         hello1.sayHello();
 

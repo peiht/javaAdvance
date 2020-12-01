@@ -4,10 +4,10 @@ package com.javaAdvace.netty.nio.netty;
 public class NettyServerApplication {
 
     public static void main(String[] args) {
-        HttpServer server = new HttpServer(false,8808);
+        HttpServer server = new HttpServer(false, 8808);
         try {
             server.run();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

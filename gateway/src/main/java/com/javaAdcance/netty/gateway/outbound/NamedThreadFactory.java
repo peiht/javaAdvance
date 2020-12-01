@@ -7,8 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 线程的工厂类
- * @author hitopei
  *
+ * @author hitopei
  */
 public class NamedThreadFactory implements ThreadFactory {
 
@@ -18,7 +18,7 @@ public class NamedThreadFactory implements ThreadFactory {
     private final String namePrefix;
     private final boolean deamon;
 
-    public NamedThreadFactory(String namePrefix, boolean deamon){
+    public NamedThreadFactory(String namePrefix, boolean deamon) {
         this.deamon = deamon;
         SecurityManager s = System.getSecurityManager();
         group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();

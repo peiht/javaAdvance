@@ -6,11 +6,10 @@ import java.util.concurrent.Semaphore;
 
 /**
  * @author Administrator
- *
- *
  */
 public class SemaphoreDemo2 {
     private final static int threadCount = 20;
+
     public static void main(String[] args) {
         ExecutorService service = Executors.newCachedThreadPool();
         final Semaphore semaphore = new Semaphore(3);
@@ -32,7 +31,7 @@ public class SemaphoreDemo2 {
         service.shutdown();
     }
 
-    private static void test(int threadNum) throws InterruptedException{
+    private static void test(int threadNum) throws InterruptedException {
         System.out.println("id :" + threadNum + ", " + Thread.currentThread().getName());
         Thread.sleep(1000);
     }

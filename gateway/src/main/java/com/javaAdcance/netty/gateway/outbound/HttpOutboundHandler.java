@@ -22,7 +22,7 @@ public class HttpOutboundHandler {
     private ExecutorService executorService;
     private OkHttpClient okHttpClient;
 
-    public HttpOutboundHandler(String backendUrl){
+    public HttpOutboundHandler(String backendUrl) {
         this.backendUrl = backendUrl.endsWith("/") ? backendUrl.substring(0, backendUrl.length() - 1) : backendUrl;
 
         int cores = Runtime.getRuntime().availableProcessors() * 2;
@@ -129,7 +129,7 @@ public class HttpOutboundHandler {
     }
 
     private void handleResponse(final FullHttpRequest request, final ChannelHandlerContext ctx,
-                                final Response resultResponse){
+                                final Response resultResponse) {
         FullHttpResponse response = null;
         try {
             byte[] body = resultResponse.body().bytes();
