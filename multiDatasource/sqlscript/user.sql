@@ -5,6 +5,5 @@ CREATE TABLE `user` (
                         `c_time` datetime NOT NULL DEFAULT now() COMMENT '创建时间',
                         `u_time` datetime NOT NULL DEFAULT now() COMMENT '修改时间',
                         PRIMARY KEY (`id`),
-                        UNIQUE KEY `phone` (`phone`) USING BTREE,
-                        KEY `IDXC_TIME` (`c_time`) USING BTREE
+                        UNIQUE KEY `phone` (`phone`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
