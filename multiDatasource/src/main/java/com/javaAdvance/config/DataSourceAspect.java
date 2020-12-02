@@ -1,5 +1,6 @@
 package com.javaAdvance.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -16,12 +17,16 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
+@Slf4j
 public class DataSourceAspect {
 
-    @Pointcut("execution(* com.javaAdvance.*.service..*.*(..))")
+    /**
+     * 通过注解来管理那些需要动态切换数据源
+     */
+    @Pointcut("execution(* com.javaAdvance.service..*.*(..))")
     public void aspect(){}
 
-    @Before("acpect()")
+    @Before("aspect()")
     private void before(JoinPoint joinPoint){
         Object target = joinPoint.getTarget();
         String method = joinPoint.getSignature().getName();
@@ -33,6 +38,8 @@ public class DataSourceAspect {
             Method method1 = clazz.getMethod(method, parameterTypes);
             if (method1.isAnnotationPresent(MyDataSource.class)){
                 MyDataSource dataSource = method1.getAnnotation(MyDataSource.class);
+                //输出方法和对应执行的数据源
+                log.info("方法{},数据源的类型为{}", method, dataSource.value().getName());
                 DataSourceContextHolder.putDataSource(dataSource.value().getName());
             }
         } catch (NoSuchMethodException e) {

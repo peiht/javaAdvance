@@ -24,7 +24,7 @@ public class MyBatisPlusGenerator {
 
     public static void main(String[] args) {
 
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = "/Users/hitopei/Documents/GitHub/javaAdvance/multiDatasource";
 
         // 自定义需要填充的字段
         List<TableFill> tableFillList = new ArrayList<TableFill>();
@@ -97,7 +97,7 @@ public class MyBatisPlusGenerator {
 
         // 4. 包名策略配置
         PackageConfig pkConfig = new PackageConfig();
-        pkConfig.setParent("com.yjqt.api")
+        pkConfig.setParent("com.javaAdvance")
                 //dao
                 .setMapper("repository.mysql.mapper")
                 //servcie
