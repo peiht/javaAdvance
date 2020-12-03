@@ -5,6 +5,7 @@ import com.javaAdvance.sharding.repository.mysql.domain.User;
 import com.javaAdvance.sharding.repository.mysql.mapper.UserMapper;
 import com.javaAdvance.sharding.service.UserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.shardingsphere.api.hint.HintManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,7 +22,11 @@ import java.util.Date;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     @Override
     public ResultBean getUser(Integer id) {
-        return ResultBean.success(this.getById(id));
+        HintManager hintManager = HintManager.getInstance();
+        hintManager.setMasterRouteOnly();
+        User user = this.getById(id);
+        hintManager.close();
+        return ResultBean.success(user);
     }
 
     @Override

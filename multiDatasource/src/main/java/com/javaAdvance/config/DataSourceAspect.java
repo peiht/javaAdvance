@@ -2,6 +2,7 @@ package com.javaAdvance.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -33,11 +34,11 @@ public class DataSourceAspect {
         Class<?> clazz = target.getClass();
         Class<?>[] parameterTypes = ((MethodSignature) joinPoint.getSignature())
                 .getMethod().getParameterTypes();
-
         try {
             Method method1 = clazz.getMethod(method, parameterTypes);
             if (method1.isAnnotationPresent(MyDataSource.class)){
                 MyDataSource dataSource = method1.getAnnotation(MyDataSource.class);
+
                 //输出方法和对应执行的数据源
                 log.info("方法{},数据源的类型为{}", method, dataSource.value().getName());
                 DataSourceContextHolder.putDataSource(dataSource.value().getName());
@@ -45,5 +46,10 @@ public class DataSourceAspect {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    @After("aspect()")
+    private void after(JoinPoint joinPoint){
+        DataSourceContextHolder.remove();
     }
 }

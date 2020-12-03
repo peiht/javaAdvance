@@ -1,5 +1,7 @@
 package com.javaAdvance.config;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author hitopei
@@ -31,6 +34,12 @@ public class DataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
+    @Bean(name = "slave1")
+    @ConfigurationProperties(prefix = "datasource.slave1")
+    public DataSource dataSourceSlave1(){
+        return DataSourceBuilder.create().build();
+    }
+
     @Bean(name = "dynamicDataSource")
     @Primary
     public DataSource dynamicDataSource(){
@@ -39,10 +48,11 @@ public class DataSourceConfig {
         DataSource slave = dataSourceSlave();
 
         dataSource.setDefaultTargetDataSource(master);
-        Map<Object, Object> map = new HashMap<>();
+        Map<Object, Object> map = new HashMap<>(2);
         map.put(DataSourceType.Master, master);
         map.put(DataSourceType.Slave, slave);
         dataSource.setTargetDataSources(map);
         return dataSource;
     }
+
 }
