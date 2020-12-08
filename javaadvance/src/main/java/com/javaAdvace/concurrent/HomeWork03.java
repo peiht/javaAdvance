@@ -84,7 +84,8 @@ public class HomeWork03 {
         // 然后退出main线程
     }
 
-    /**
+    /**'
+     *
      * FutureTask配合Thread
      */
     public void executeSync3() {

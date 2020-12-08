@@ -22,7 +22,7 @@ public class ShardingInsert {
             connection = DriverManager.getConnection(jdbcUrl, username, password);
 
             long start = System.currentTimeMillis();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 String insertSql = "insert into `goods_order` (`order_name`, `user_id`, `user_name`, `trade_amount`, `trade_type`, `order_status`, " +
                         "`trade_status`, `user_phone`, `user_mail`, "  +
                         "`trade_num`, `source`, `goods_id`, `goods_name`, `goods_detail_id`, `coupon_id`, `remark`) " +
