@@ -28,7 +28,7 @@ public class InsertMillion {
 
             long start = System.currentTimeMillis();
             Random random = new Random();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1000; i++) {
                 //增
                 long start1 = System.currentTimeMillis();
                 String insertSql = "INSERT INTO `goods_order`(`order_name`, `user_id`, `user_name`, `trade_amount`, `trade_type`, `order_status`, " +
