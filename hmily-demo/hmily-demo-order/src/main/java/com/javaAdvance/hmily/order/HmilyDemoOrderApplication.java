@@ -1,4 +1,4 @@
-package com.javaAdvance.tcc;
+package com.javaAdvance.hmily.order;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author hitopei
  *
- * hmily实现tcc
+ * hmily order
  */
 @SpringBootApplication
-public class HmilyDemoApplication {
+public class HmilyDemoOrderApplication {
     public static void main(String[] args) {
-        SpringApplication.run(HmilyDemoApplication.class, args);
+        SpringApplication.run(HmilyDemoOrderApplication.class, args);
     }
 }

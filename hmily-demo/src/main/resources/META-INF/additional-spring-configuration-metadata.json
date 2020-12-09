@@ -1,8 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "hmily.server.configMode",
-      "type": "java.lang.String",
-      "description": "Description for hmily.server.configMode."
-  }
-] }
