@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author hitopei
@@ -12,6 +13,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * hmily order
  */
 @EnableEurekaClient
+@EnableFeignClients
 @SpringBootApplication(exclude = {MongoAutoConfiguration.class})
 @MapperScan(basePackages = "com.javaAdvance.hmily.order.repository.mysql.mapper")
 public class HmilyDemoOrderApplication {

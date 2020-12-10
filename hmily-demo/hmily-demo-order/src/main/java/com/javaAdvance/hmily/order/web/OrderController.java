@@ -24,7 +24,7 @@ public class OrderController {
 
     @RequestMapping("pay")
     public ResultBean pay(@RequestParam("userId") Integer userId,
-                          @RequestParam("stockId") Integer goodsId,
+                          @RequestParam("goodsId") Integer goodsId,
                           @RequestParam("amount") BigDecimal amount,
                           @RequestParam("count") Integer count){
 
