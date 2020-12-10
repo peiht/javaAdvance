@@ -48,7 +48,7 @@ CREATE TABLE `goods` (
 商品明细表：
 
 ```sql
-CREATE TABLE `goods_detail` (
+CREATE TABLE `stock` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `goods_id` int(10) NOT NULL COMMENT '商品id',
   `stock_all` int(10) NOT NULL COMMENT '当前品类总库存',

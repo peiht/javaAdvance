@@ -24,7 +24,7 @@ public class MyBatisPlusGenerator {
 
     public static void main(String[] args) {
 
-        final String projectPath = "D:\\code\\GitHub\\javaAdvance\\hmily-demo\\hmily-demo-stock";
+        final String projectPath = "/Users/hitopei/Documents/GitHub/javaAdvance/hmily-demo/hmily-demo-stock";
 
         // 自定义需要填充的字段
         List<TableFill> tableFillList = new ArrayList<TableFill>();
@@ -90,7 +90,7 @@ public class MyBatisPlusGenerator {
                 .setNaming(NamingStrategy.underline_to_camel)
                 //.setTablePrefix("tbl_")
                 // 生成的表
-                .setInclude("goods_detail")
+                .setInclude("stock")
                 .setEntityBooleanColumnRemoveIsPrefix(false)
                 // 自定义实体，公共字段
                 .setTableFillList(tableFillList);

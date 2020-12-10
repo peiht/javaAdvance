@@ -1,7 +1,7 @@
 server:
   port: 8802
   servlet:
-    context-path: /stock
+    context-path: /hmily-stock
 
 spring:
   application:

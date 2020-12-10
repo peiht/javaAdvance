@@ -1,5 +1,7 @@
 package com.javaAdvance.hmily.user.service;
 
+import com.alibaba.fastjson.JSONObject;
+import com.javaAdvance.hmily.user.base.ResultBean;
 import com.javaAdvance.hmily.user.repository.mysql.domain.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
+    ResultBean payAccount(JSONObject data);
 }

@@ -1,9 +1,14 @@
 package com.javaAdvance.hmily.order.web;
 
 import com.javaAdvance.hmily.order.base.ResultBean;
+import com.javaAdvance.hmily.order.service.PayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.xml.ws.soap.Addressing;
+import java.math.BigDecimal;
 
 /**
  * @author ty
@@ -14,11 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("order")
 public class OrderController {
 
+    @Autowired
+    private PayService payService;
+
     @RequestMapping("pay")
     public ResultBean pay(@RequestParam("userId") Integer userId,
-                          @RequestParam("stockId") Integer stockId,
-                          @RequestParam("amount") Integer amount,
+                          @RequestParam("stockId") Integer goodsId,
+                          @RequestParam("amount") BigDecimal amount,
                           @RequestParam("count") Integer count){
+
+        payService.pay(userId, count, amount, goodsId);
         return ResultBean.success();
     }
 }
