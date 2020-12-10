@@ -6,6 +6,10 @@ server:
 spring:
   application:
     name: hmily-stock
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3308/stock?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true&useSSL=false
+    username: root
+    password:
 
 eureka:
   client:
