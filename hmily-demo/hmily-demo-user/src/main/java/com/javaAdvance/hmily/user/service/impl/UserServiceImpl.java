@@ -24,13 +24,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
-    public ResultBean payAccount(JSONObject data) {
+    public Boolean payAccount(JSONObject data) {
         Integer userId = data.getInteger("userId");
         BigDecimal amount = data.getBigDecimal("amount");
         Integer count = data.getInteger("count");
         BigDecimal amountAll = BigDecimal.valueOf(count).add(amount);
         this.baseMapper.updateAccount(userId, amountAll);
-        return ResultBean.success();
+        return Boolean.TRUE;
     }
 
 

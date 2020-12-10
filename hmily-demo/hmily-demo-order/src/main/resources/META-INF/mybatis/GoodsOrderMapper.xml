@@ -18,4 +18,7 @@
         order_id, order_name, user_id, trade_amount, order_status, create_time, update_time
     </sql>
 
+    <update id="update">
+        update goods_order set order_status = #{orderStatus} where order_id = #{orderId};
+    </update>
 </mapper>

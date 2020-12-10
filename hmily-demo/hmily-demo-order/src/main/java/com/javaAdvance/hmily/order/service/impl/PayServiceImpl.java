@@ -32,7 +32,7 @@ public class PayServiceImpl implements PayService {
     private UserFeign userFeign;
 
     @Override
-    @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancels")
+    @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
     public ResultBean pay(Integer userId, Integer count, BigDecimal amount, Integer goodsId) {
         ResultBean<GoodsOrder> resultBean = goodsOrderService.createOrder(userId, count, amount, goodsId);
         GoodsOrder order = resultBean.getData();

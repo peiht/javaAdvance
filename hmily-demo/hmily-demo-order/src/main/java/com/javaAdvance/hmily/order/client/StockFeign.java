@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author hitopei
  */
-@FeignClient(value = "stock-feign")
+@FeignClient(value = "hmily-stock")
 public interface StockFeign {
 
     /**
@@ -20,5 +20,5 @@ public interface StockFeign {
      */
     @Hmily
     @RequestMapping("/hmily-stock/stock/decrease")
-    ResultBean decreaseStock(@RequestBody JSONObject data);
+    Boolean decreaseStock(@RequestBody JSONObject data);
 }

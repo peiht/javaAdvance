@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.javaAdvance.hmily.stock.base.ResultBean;
 import com.javaAdvance.hmily.stock.repository.mysql.domain.Stock;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * <p>
@@ -15,5 +16,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface StockService extends IService<Stock> {
 
-    ResultBean decrease(JSONObject data);
+    Boolean decrease(JSONObject data);
 }

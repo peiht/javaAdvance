@@ -15,8 +15,8 @@ import org.apache.ibatis.annotations.Update;
  */
 public interface GoodsOrderMapper extends BaseMapper<GoodsOrder> {
 
-    @Update("update goods_order set order_status = #{orderStatus} where " +
-            "order_id = #{orderId}")
+//    @Update("update goods_order set order_status = #{1} where " +
+//            "order_id = #{0}")
     int update(@Param("orderId") Long orderId, @Param("orderStatus") Integer orderStatus);
 
 }

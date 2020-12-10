@@ -1,7 +1,7 @@
 server:
   port: 8803
   servlet:
-    context-path: /order
+    context-path: /hmily-order
 
 spring:
   application:
@@ -48,3 +48,24 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
+
+#Ribbon的负载均衡策略
+ribbon:
+  NFLoadBalancerRuleClassName:  com.netflix.loadbalancer.RandomRule
+  MaxAutoRetriesNextServer : 0
+  MaxAutoRetries: 0
+  ReadTimeout: 10000
+feign:
+  hystrix:
+    enabled : false
+
+#logging:
+#  level:
+#    root: error
+#    org.springframework.web: info
+#    org.apache.ibatis: debug
+#    org.dromara.hmily.demo.bonuspoint: debug
+#    org.dromara.hmily.demo.lottery: debug
+#    org.dromara.hmily.demo: debug
+#    io.netty: info
+#  path: "./logs"

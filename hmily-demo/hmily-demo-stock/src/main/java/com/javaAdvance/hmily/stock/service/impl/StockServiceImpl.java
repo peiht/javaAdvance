@@ -23,18 +23,16 @@ public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
     @Override
     @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
-    public ResultBean decrease(JSONObject data) {
+    public Boolean decrease(JSONObject data) {
         this.baseMapper.decrease(data.getInteger("goodsId"), data.getInteger("count"));
-        return ResultBean.success();
+        return Boolean.TRUE;
     }
 
-    public ResultBean confirm(JSONObject data){
+    public void confirm(JSONObject data){
         this.baseMapper.confirm(data.getInteger("goodsId"), data.getInteger("count"));
-        return ResultBean.success();
     }
 
-    public ResultBean cancel(JSONObject data){
+    public void cancel(JSONObject data){
         this.baseMapper.cancel(data.getInteger("goodsId"), data.getInteger("count"));
-        return ResultBean.success();
     }
 }

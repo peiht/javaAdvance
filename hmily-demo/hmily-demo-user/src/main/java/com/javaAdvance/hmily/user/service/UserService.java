@@ -15,5 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface UserService extends IService<User> {
 
-    ResultBean payAccount(JSONObject data);
+    Boolean payAccount(JSONObject data);
 }

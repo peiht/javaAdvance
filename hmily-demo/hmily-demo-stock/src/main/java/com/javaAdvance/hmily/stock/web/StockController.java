@@ -31,7 +31,7 @@ public class StockController {
      * @return
      */
     @RequestMapping("decrease")
-    public ResultBean decrease(@RequestBody JSONObject data){
+    public Boolean decrease(@RequestBody JSONObject data){
         return stockService.decrease(data);
     }
 }

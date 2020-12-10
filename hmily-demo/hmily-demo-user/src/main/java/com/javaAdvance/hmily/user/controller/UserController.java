@@ -48,7 +48,7 @@ public class UserController {
     }
 
     @RequestMapping("pay")
-    public ResultBean pay(@RequestBody JSONObject data){
+    public Boolean pay(@RequestBody JSONObject data){
         return userService.payAccount(data);
     }
 }
