@@ -4,6 +4,7 @@ import com.javaAdvance.hmily.order.repository.mysql.domain.GoodsOrder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -13,6 +14,7 @@ import org.apache.ibatis.annotations.Update;
  * @author hitopei
  * @since 2020-12-09
  */
+@Repository
 public interface GoodsOrderMapper extends BaseMapper<GoodsOrder> {
 
 //    @Update("update goods_order set order_status = #{1} where " +

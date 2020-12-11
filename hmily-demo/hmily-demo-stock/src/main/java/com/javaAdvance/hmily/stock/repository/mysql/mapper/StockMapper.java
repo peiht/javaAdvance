@@ -20,7 +20,7 @@ public interface StockMapper extends BaseMapper<Stock> {
     int decrease(@Param("goodsId") Integer goodsId, @Param("count") Integer count);
 
 
-    @Update("update stock set stock_pre - #{count} where goods_id = #{goodsId} and stock_pre > 0")
+    @Update("update stock set stock_pre = stock_pre - #{count} where goods_id = #{goodsId} and stock_pre > 0")
     int confirm(@Param("goodsId") Integer goodsId, @Param("count") Integer count);
 
     @Update("update stock set stock_all = stock_all + #{count}, stock_pre - #{count}" +

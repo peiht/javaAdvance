@@ -28,11 +28,15 @@ public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements
         return Boolean.TRUE;
     }
 
-    public void confirm(JSONObject data){
+    public Boolean confirm(JSONObject data){
+        System.out.println("库存确认");
         this.baseMapper.confirm(data.getInteger("goodsId"), data.getInteger("count"));
+        return Boolean.TRUE;
     }
 
-    public void cancel(JSONObject data){
+    public Boolean cancel(JSONObject data){
+        System.out.println("库存取消");
         this.baseMapper.cancel(data.getInteger("goodsId"), data.getInteger("count"));
+        return Boolean.TRUE;
     }
 }

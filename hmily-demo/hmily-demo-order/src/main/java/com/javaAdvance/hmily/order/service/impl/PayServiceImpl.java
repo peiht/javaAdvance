@@ -33,34 +33,44 @@ public class PayServiceImpl implements PayService {
 
     @Override
     @HmilyTCC(confirmMethod = "confirm", cancelMethod = "cancel")
-    public ResultBean pay(Integer userId, Integer count, BigDecimal amount, Integer goodsId) {
-        ResultBean<GoodsOrder> resultBean = goodsOrderService.createOrder(userId, count, amount, goodsId);
-        GoodsOrder order = resultBean.getData();
+    public ResultBean pay(GoodsOrder order) {
         //修改订单状态
         updateProcess(order);
-        //扣减用户表的余额
+        //扣减用户表的余额 
         JSONObject accountData = new JSONObject();
-        accountData.put("userId", userId);
-        accountData.put("amount", amount);
-        accountData.put("count", count);
-        userFeign.accountPay(accountData);
+        accountData.put("userId", order.getUserId());
+        accountData.put("amount", order.getSignalPrice());
+        accountData.put("count", order.getCount());
+        boolean res1 = userFeign.accountPay(accountData);
+        System.out.println("调用扣款完成");
         //扣减库存表库存
         JSONObject stockData = new JSONObject();
-        stockData.put("goodsId", goodsId);
-        stockData.put("count", count);
-        stockFeign.decreaseStock(stockData);
+        stockData.put("goodsId", order.getGoodsId());
+        stockData.put("count", order.getCount());
+        boolean res2 = stockFeign.decreaseStock(stockData);
+        System.out.println("调用扣库存完成");
         return ResultBean.success();
+    }
+
+    @Override
+    public GoodsOrder createOrder(Integer userId, Integer count, BigDecimal amount, Integer goodsId) {
+        ResultBean<GoodsOrder> resultBean = goodsOrderService.createOrder(userId, count, amount, goodsId);
+        return resultBean.getData();
     }
 
     public void updateProcess(GoodsOrder order){
         orderMapper.update(order.getOrderId(), 1);
     }
 
-    public void confirm(GoodsOrder order) {
+    public ResultBean confirm(GoodsOrder order) {
         orderMapper.update(order.getOrderId(), 2);
+        System.out.println("订单确认");
+        return ResultBean.success();
     }
 
-    public void cancel(GoodsOrder order) {
+    public ResultBean cancel(GoodsOrder order) {
         orderMapper.update(order.getOrderId(), 3);
+        System.out.println("订单取消");
+        return ResultBean.success();
     }
 }

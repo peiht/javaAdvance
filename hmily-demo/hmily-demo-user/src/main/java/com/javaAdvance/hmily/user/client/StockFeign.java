@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  *
  */
-@FeignClient(value = "stock-service")
+//@FeignClient(value = "stock-service")
 public interface StockFeign {
 
     /**

@@ -1,7 +1,10 @@
 package com.javaAdvance.hmily.order.repository.mysql.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
@@ -53,6 +56,39 @@ public class GoodsOrder extends Model<GoodsOrder> {
      * 更新时间
      */
     private Date updateTime;
+
+    @TableField(exist = false)
+    private Integer count;
+
+    @TableField(exist = false)
+    private BigDecimal signalPrice;
+    @TableField(exist = false)
+    private Integer goodsId;
+
+    public Integer getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(Integer goodsId) {
+        this.goodsId = goodsId;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public BigDecimal getSignalPrice() {
+        return signalPrice;
+    }
+
+    public void setSignalPrice(BigDecimal signalPrice) {
+        this.signalPrice = signalPrice;
+    }
+
 
 
     public Long getOrderId() {

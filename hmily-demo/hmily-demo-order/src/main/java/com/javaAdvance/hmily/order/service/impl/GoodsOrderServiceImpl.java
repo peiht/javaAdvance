@@ -30,6 +30,9 @@ public class GoodsOrderServiceImpl extends ServiceImpl<GoodsOrderMapper, GoodsOr
         goodsOrder.setOrderStatus(0);
         goodsOrder.setUserId(userId);
         goodsOrder.setTradeAmount(amount.multiply(BigDecimal.valueOf(count)).toString());
+        goodsOrder.setGoodsId(goodsId);
+        goodsOrder.setCount(count);
+        goodsOrder.setSignalPrice(amount);
         this.save(goodsOrder);
         return ResultBean.success(goodsOrder);
     }

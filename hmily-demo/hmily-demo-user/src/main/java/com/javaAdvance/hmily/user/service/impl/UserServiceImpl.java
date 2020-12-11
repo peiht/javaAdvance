@@ -34,19 +34,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
 
-    public int confirm(JSONObject data){
+    public Boolean confirm(JSONObject data){
         Integer userId = data.getInteger("userId");
         BigDecimal amount = data.getBigDecimal("amount");
         Integer count = data.getInteger("count");
         BigDecimal amountAll = BigDecimal.valueOf(count).add(amount);
-        return this.baseMapper.confirm(userId, amountAll);
+        System.out.println("账户确认扣款");
+        this.baseMapper.confirm(userId, amountAll);
+        return Boolean.TRUE;
     }
 
-    public int cancel(JSONObject data){
+    public Boolean cancel(JSONObject data){
         Integer userId = data.getInteger("userId");
         BigDecimal amount = data.getBigDecimal("amount");
         Integer count = data.getInteger("count");
         BigDecimal amountAll = BigDecimal.valueOf(count).add(amount);
-        return this.baseMapper.cancel(userId, amountAll);
+        System.out.println("账户取消扣款");
+        this.baseMapper.cancel(userId, amountAll);
+        return Boolean.TRUE;
     }
 }

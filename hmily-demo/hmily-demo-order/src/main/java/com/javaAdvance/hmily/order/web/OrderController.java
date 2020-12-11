@@ -1,6 +1,7 @@
 package com.javaAdvance.hmily.order.web;
 
 import com.javaAdvance.hmily.order.base.ResultBean;
+import com.javaAdvance.hmily.order.repository.mysql.domain.GoodsOrder;
 import com.javaAdvance.hmily.order.service.PayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class OrderController {
                           @RequestParam("goodsId") Integer goodsId,
                           @RequestParam("amount") BigDecimal amount,
                           @RequestParam("count") Integer count){
-
-        payService.pay(userId, count, amount, goodsId);
+        GoodsOrder order = payService.createOrder(userId, count, amount, goodsId);
+        payService.pay(order);
         return ResultBean.success();
     }
 }

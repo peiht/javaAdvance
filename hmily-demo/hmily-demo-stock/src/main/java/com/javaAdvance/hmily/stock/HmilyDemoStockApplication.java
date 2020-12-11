@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ImportResource;
 
 /**
  * @author hitopei
@@ -16,6 +17,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableEurekaClient
 @EnableFeignClients
 @MapperScan(basePackages = "com.javaAdvance.hmily.stock.repository.mysql.mapper")
+@ImportResource({"classpath:applicationContext.xml"})
 public class HmilyDemoStockApplication {
     public static void main(String[] args) {
         SpringApplication.run(HmilyDemoStockApplication.class, args);
