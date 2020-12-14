@@ -29,6 +29,7 @@ public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements
     }
 
     public Boolean confirm(JSONObject data){
+
         System.out.println("库存确认");
         this.baseMapper.confirm(data.getInteger("goodsId"), data.getInteger("count"));
         return Boolean.TRUE;
