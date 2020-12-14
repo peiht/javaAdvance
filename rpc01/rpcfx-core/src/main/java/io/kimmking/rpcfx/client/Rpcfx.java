@@ -70,6 +70,7 @@ public final class Rpcfx {
                     .post(RequestBody.create(JSONTYPE, reqJson))
                     .build();
             String respJson = client.newCall(request).execute().body().string();
+            
             System.out.println("resp json: "+respJson);
             return JSON.parseObject(respJson, RpcfxResponse.class);
         }
