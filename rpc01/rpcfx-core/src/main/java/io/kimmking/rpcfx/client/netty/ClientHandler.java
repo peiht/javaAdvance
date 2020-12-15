@@ -12,6 +12,7 @@ import io.netty.util.CharsetUtil;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author hitopei
@@ -22,10 +23,12 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     private final RpcfxRequest request;
     private final String url;
+    private final CountDownLatch latch;
 
-    public ClientHandler(RpcfxRequest request, String url){
+    public ClientHandler(RpcfxRequest request, String url, CountDownLatch latch){
         this.request = request;
         this.url = url;
+        this.latch = latch;
     }
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception{
@@ -48,6 +51,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             final String key = JSON.toJSONString(request);
             NettyCache.put(key, res);
             System.out.println("content : " + res);
+            latch.countDown();
         }
         ctx.channel().close();
     }

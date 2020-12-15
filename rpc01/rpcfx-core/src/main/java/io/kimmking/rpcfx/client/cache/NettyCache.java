@@ -7,18 +7,22 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author ty
  *
  * 请求结果缓存
+ *
+ * 简单功能，还得加上缓存时长等功能
  */
 public class NettyCache {
 
-    private static final Map<String, String> cache = new ConcurrentHashMap<>(16);
+    private static final Map<String, String> CACHE = new ConcurrentHashMap<>(16);
 
     public static void put(final String key, final String val) {
-        cache.put(key, val);
+        CACHE.put(key, val);
     }
 
     public static String get(final String key) {
-        return cache.getOrDefault(key, "");
+        return CACHE.getOrDefault(key, "");
     }
 
-
+    public static int size(){
+        return CACHE.size();
+    }
 }

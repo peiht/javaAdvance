@@ -6,11 +6,12 @@ import io.kimmking.rpcfx.client.cache.NettyCache;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.HttpClientCodec;
 import io.netty.handler.codec.http.HttpContentDecompressor;
 import io.netty.handler.codec.http.HttpObjectAggregator;
+
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @author hitopei
@@ -35,7 +36,8 @@ public class NettyClient {
      */
     private final int port;
 
-    private SocketChannel socketChannel;
+    private final CountDownLatch latch = new CountDownLatch(1);
+
 
     public NettyClient(RpcfxRequest request, String url, String host, int port) {
         this.host = host;
@@ -61,16 +63,15 @@ public class NettyClient {
                 ch.pipeline().addLast(new HttpClientCodec());
                 ch.pipeline().addLast(new HttpObjectAggregator(65536));
                 ch.pipeline().addLast(new HttpContentDecompressor());
-                ch.pipeline().addLast(new ClientHandler(request, url));
+                ch.pipeline().addLast(new ClientHandler(request, url, latch));
             }
         });
 
         try {
             ChannelFuture future = client.connect().sync();
-            System.out.println("future is done ? " + future.isDone());
-            if (future.isDone()) {
-                result = NettyCache.get(JSON.toJSONString(request));
-            }
+            latch.await();
+            System.out.println(NettyCache.size());
+            result = NettyCache.get(JSON.toJSONString(request));
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -81,14 +82,5 @@ public class NettyClient {
         return result;
     }
 
-    public static void main(String[] args) {
-        RpcfxRequest rpcfxRequest = new RpcfxRequest();
-        rpcfxRequest.setServiceClass("io.kimmking.rpcfx.demo.api.UserService");
-        rpcfxRequest.setMethod("findById");
-        Object[] params = new Object[1];
-        params[0] = 1992129;
-        rpcfxRequest.setParams(params);
-        NettyClient client = new NettyClient(rpcfxRequest, "/", "localhost", 8080);
-        System.out.println(client.doRequest());
-    }
+
 }
