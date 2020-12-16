@@ -19,8 +19,15 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping("transfer")
-    public Boolean transfer(BigDecimal amount){
-        return accountService.transfer(amount);
+    /**
+     * 兑换人民币
+     * @param amount
+     * @param fromUserId
+     * @param toUserId
+     * @return
+     */
+    @RequestMapping("transferRMB")
+    public Boolean transferRMB(BigDecimal amount, String fromUserId, String toUserId){
+        return accountService.transferRMB(amount, fromUserId, toUserId);
     }
 }

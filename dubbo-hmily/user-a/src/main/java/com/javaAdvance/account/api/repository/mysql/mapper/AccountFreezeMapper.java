@@ -2,6 +2,9 @@ package com.javaAdvance.account.api.repository.mysql.mapper;
 
 import com.javaAdvance.account.api.repository.mysql.domain.AccountFreeze;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -13,4 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AccountFreezeMapper extends BaseMapper<AccountFreeze> {
 
+    int updateFreezeRMB(@Param("userId") String userId, @Param("amount") BigDecimal amount);
+
+    int unFreezeRMB(@Param("userId") String userId, @Param("amount") BigDecimal amount);
 }
