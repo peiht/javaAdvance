@@ -19,7 +19,7 @@ public class AccountController {
     private AccountService accountService;
 
     @RequestMapping("transfer")
-    public Boolean transfer(BigDecimal amount){
-        return accountService.transfer(amount);
+    public Boolean transfer(BigDecimal amount, String fromUserId, String toUserId){
+        return accountService.consumeUsd(amount, fromUserId, toUserId);
     }
 }

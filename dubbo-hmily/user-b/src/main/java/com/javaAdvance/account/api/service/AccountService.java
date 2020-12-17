@@ -15,4 +15,6 @@ public interface AccountService {
      * @return Boolean
      */
     Boolean transfer(BigDecimal amount);
+
+    Boolean consumeUsd(BigDecimal amount, String fromUserId, String toUserId);
 }

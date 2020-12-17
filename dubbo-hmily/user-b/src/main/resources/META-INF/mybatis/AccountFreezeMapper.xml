@@ -17,4 +17,11 @@
         id, user_id, freeze_rmb, freeze_usd, create_time, update_time
     </sql>
 
+    <update id="addFreeze">
+        update account_freeze set freeze_usd = freeze_usd + #{amount} where user_id = #{userId}
+    </update>
+
+    <update id="unfreeze">
+        update account_freeze set freeze_usd = freeze_usd - #{amount} where user_id = #{userId} and freeze_usd > 0
+    </update>
 </mapper>

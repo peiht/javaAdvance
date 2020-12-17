@@ -1,6 +1,7 @@
 package com.javaAdvance.account.api.web;
 
 import com.javaAdvance.account.api.service.AccountService;
+import com.javaAdvance.account.api.service.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import java.math.BigDecimal;
 public class AccountController {
 
     @Autowired
-    private AccountService accountService;
+    private TransferService transferService;
 
     /**
      * 兑换人民币
@@ -27,7 +28,7 @@ public class AccountController {
      * @return
      */
     @RequestMapping("transferRMB")
-    public Boolean transferRMB(BigDecimal amount, String fromUserId, String toUserId){
-        return accountService.transferRMB(amount, fromUserId, toUserId);
+    public Boolean transferRmb(BigDecimal amount, String fromUserId, String toUserId){
+        return transferService.transferRmb(amount, fromUserId, toUserId);
     }
 }

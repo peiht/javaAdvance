@@ -16,4 +16,11 @@
         id, user_id, balance, create_time, update_time
     </sql>
 
+    <update id="decreaseUsd" >
+        update account_usd set balance = balance - #{amount} where user_id = #{userId} and balance > 0
+    </update>
+
+    <update id="cancel">
+        update account_usd set balance = balance + #{amount} where user_id = #{userId}
+    </update>
 </mapper>
