@@ -3,6 +3,8 @@ package com.javaAdvance.account.api.service;
 import com.javaAdvance.account.api.repository.mysql.domain.AccountUsd;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.math.BigDecimal;
+
 /**
  * <p>
  *  服务类

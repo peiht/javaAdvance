@@ -4,7 +4,11 @@ import com.javaAdvance.account.api.repository.mysql.domain.AccountUsd;
 import com.javaAdvance.account.api.repository.mysql.mapper.AccountUsdMapper;
 import com.javaAdvance.account.api.service.AccountUsdService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * <p>

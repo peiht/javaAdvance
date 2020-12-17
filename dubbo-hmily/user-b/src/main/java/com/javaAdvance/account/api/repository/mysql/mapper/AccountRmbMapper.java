@@ -2,6 +2,9 @@ package com.javaAdvance.account.api.repository.mysql.mapper;
 
 import com.javaAdvance.account.api.repository.mysql.domain.AccountRmb;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AccountRmbMapper extends BaseMapper<AccountRmb> {
 
+    int addRmb(@Param("amount") BigDecimal amount, @Param("userId") String userId);
 }

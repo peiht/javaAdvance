@@ -3,6 +3,7 @@ package com.javaAdvance.account;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * 启动类
  */
 @MapperScan({"com.javaAdvance.account.api.repository.mysql.mapper"})
-@SpringBootApplication
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class})
 @EnableTransactionManagement
 public class AccountApplication {
 

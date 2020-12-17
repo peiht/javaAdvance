@@ -16,4 +16,7 @@
         id, user_id, balance, create_time, update_time
     </sql>
 
+    <update id="addRmb">
+        update account_rmb set balance = balance + #{amount} where user_id = #{userId}
+    </update>
 </mapper>

@@ -1,5 +1,7 @@
 package com.javaAdvance.account.api.service;
 
+import org.dromara.hmily.annotation.Hmily;
+
 import java.math.BigDecimal;
 
 /**
@@ -16,5 +18,6 @@ public interface AccountService {
      */
     Boolean transfer(BigDecimal amount);
 
+    @Hmily
     Boolean consumeUsd(BigDecimal amount, String fromUserId, String toUserId);
 }
