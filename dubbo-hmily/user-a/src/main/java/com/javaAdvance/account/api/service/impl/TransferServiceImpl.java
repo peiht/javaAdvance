@@ -32,8 +32,6 @@ public class TransferServiceImpl implements TransferService {
         int updateRes = accountRmbMapper.update(fromUserId, amount);
         //增加冻结表的RMB
         int freezeUpdate = accountFreezeMapper.updateFreezeRMB(fromUserId, amount);
-        //accountService.consumeUsd(BigDecimal.valueOf(1), toUserId, fromUserId);
-
         return Boolean.TRUE;
     }
 

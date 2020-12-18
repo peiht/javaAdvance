@@ -51,7 +51,7 @@ public class NettyClient {
      * @return res
      */
     public String doRequest(){
-        String result = "";
+        String result;
         Bootstrap client = new Bootstrap();
 
         EventLoopGroup group = new NioEventLoopGroup();

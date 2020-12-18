@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import io.kimmking.rpcfx.api.RpcfxRequest;
 import io.kimmking.rpcfx.api.RpcfxResponse;
+import io.kimmking.rpcfx.client.netty.NettyClient;
+import javassist.ClassPool;
+import javassist.CtClass;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,7 +26,7 @@ public final class Rpcfx {
 
     public static <T> T create(final Class<T> serviceClass, final String url) {
 
-        // 0. 替换动态代理 -> AOP
+        // 0. 字节码增强实现
         return (T) Proxy.newProxyInstance(Rpcfx.class.getClassLoader(), new Class[]{serviceClass}, new RpcfxInvocationHandler(serviceClass, url));
 
     }
@@ -64,15 +67,17 @@ public final class Rpcfx {
 
             // 1.可以复用client
             // 2.尝试使用httpclient或者netty client
-            OkHttpClient client = new OkHttpClient();
-            final Request request = new Request.Builder()
-                    .url(url)
-                    .post(RequestBody.create(JSONTYPE, reqJson))
-                    .build();
-            String respJson = client.newCall(request).execute().body().string();
-
-            System.out.println("resp json: "+respJson);
-            return JSON.parseObject(respJson, RpcfxResponse.class);
+//            OkHttpClient client = new OkHttpClient();
+//            final Request request = new Request.Builder()
+//                    .url(url)
+//                    .post(RequestBody.create(JSONTYPE, reqJson))
+//                    .build();
+//            String respJson = client.newCall(request).execute().body().string();
+            NettyClient nettyClient = new NettyClient(req, url, "localhost", 8080);
+            String requestJson = nettyClient.doRequest();
+            //System.out.println("resp json: "+respJson);
+            return JSON.parseObject(requestJson, RpcfxResponse.class);
         }
     }
+
 }
