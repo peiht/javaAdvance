@@ -6,8 +6,6 @@ import com.alibaba.fastjson.parser.ParserConfig;
 import io.kimmking.rpcfx.api.RpcfxRequest;
 import io.kimmking.rpcfx.api.RpcfxResponse;
 import io.kimmking.rpcfx.client.netty.NettyClient;
-import javassist.ClassPool;
-import javassist.CtClass;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
