@@ -3,10 +3,14 @@ server:
 
 spring:
   redis:
-    url: 127.0.0.1
+    port: 6379
     password:
     lettuce:
       pool:
-        max-active: 8
-        min-idle: 0
-    port: 6379
+        max-active: 100
+        min-idle: 8
+        max-idle: 100
+        max-wait: -1ms
+    database: 1
+    timeout: 10000ms
+    host: localhost
